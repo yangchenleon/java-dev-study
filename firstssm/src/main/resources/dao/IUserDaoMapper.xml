@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!--namespace:编写接口的全类名，就是告诉要实现该配置文件是哪个接口的具体实现-->
+<mapper namespace="dao.IUserDao">
+    <insert id="insert">
+        insert into user values(#{username},#{password});
+    </insert>
+
+    <select id="findAll" resultType="user">
+        select * from user;
+    </select>
+
+    <select id="findUserByNameAndPwd" resultType="user">
+        select * from user where username = #{username} and password = #{password};
+    </select>
+</mapper>

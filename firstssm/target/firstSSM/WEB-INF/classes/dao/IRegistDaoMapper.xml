@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!--namespace:编写接口的全类名，就是告诉要实现该配置文件是哪个接口的具体实现-->
+<mapper namespace="dao.IRegisterDao">
+    <resultMap id="registMap" type="register">
+        <id property="registerId" column="id" />
+        <result property="registerName" column="name"/>
+        <result property="registerAge" column="age"/>
+        <result property="registerMajor" column="major"/>
+        <result property="registerSex" column="gender"/>
+        <result property="registerAddress" column="address"/>
+        <result property="registerEmail" column="email"/>
+    </resultMap>
+
+<!--    下面的#{}一定要和类属性名一致，和resultMap没关系-->
+    <insert id="insert">
+        insert into register values(#{id}, #{name},#{age} , #{major}, #{gender}, #{address}, #{email})
+    </insert>
+
+<!--    返回的各项值会自动映射到类的各字段（即名称要对应相同，否则需自定义一个返回值以匹配类属性，即下registMap-->
+<!--    <select id="findAll" resultMap="registMap">-->
+    <select id="findAll" resultType="register">
+        select * from register;
+    </select>
+
+    <select id="findById" resultType="register">
+        select * from register where id= #{id};
+    </select>
+
+    <select id="findByNameAndId" resultType="register">
+        select * from register;
+    </select>
+</mapper>

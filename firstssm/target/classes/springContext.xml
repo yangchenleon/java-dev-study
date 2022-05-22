@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd">
+
+    <!--  工厂模式生成实例  -->
+    <bean id="user" class="beans.User"></bean>
+    <bean id="user1" class="beans.User">
+        <constructor-arg name="username" value="ff哈"></constructor-arg>
+        <constructor-arg name="password" value="123465"></constructor-arg>
+    </bean>
+
+    <!-- 两种方法工厂模式一种下面被注释那样用，格式和上面生成实例相同；
+    另一种方法：检索base-package目录下所有代码，如果有@service或@repository注解就能创建对象，可以加括号标注（忘了具体能干啥）
+    其实功能一样的，不过为了区别一般类和dao、service、controller（对，controller也是下面写的不过被放到另一个文件下）搞的不同写法
+    最后都是通过@Autowire输入实例、@qualifier可以指定具体哪个实例-->
+    <!-- <bean id="userServiceImpl" class="service.impl.UserServiceImpl"></bean>-->
+    <context:component-scan base-package="service"></context:component-scan>
+    <context:component-scan base-package="dao"></context:component-scan>
+</beans>

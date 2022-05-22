@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+<!--     这里很多都移到springContext或springBean了-->
+    <properties resource="database.properties">
+<!--        上面resource或下面一块二选一-->
+<!--        <property name="driver" value="com.mysql.cj.jdbc.Driver"/>-->
+<!--        <property name="url" value="jdbc:mysql://localhost:3306/ssmtest?serverTimezone=UTC"/>-->
+<!--        <property name="username" value="root"/>-->
+<!--        <property name="password" value="123456"/>-->
+    </properties>
+
+    <!-- 设置驼峰命名法   -->
+    <settings>
+        <setting name="mapUnderscoreToCamelCase" value="true"/>
+    </settings>
+
+    <!--用来给实体类起别名-->
+    <typeAliases>
+        <!--        <typeAlias type="beans.Register" alias="register"></typeAlias>-->
+        <!--        <typeAlias type="beans.User" alias="user"></typeAlias>-->
+        <package name="beans"/>
+    </typeAliases>
+
+    <!--配置数据源-->
+    <environments default="development">
+        <environment id="development">
+            <transactionManager type="JDBC"/>
+            <!--配置数据库连接-->
+            <dataSource type="POOLED">
+                <property name="driver" value="${driver}"/>
+                <property name="url" value="${url}"/>
+                <property name="username" value="${username}"/>
+                <property name="password" value="${password}"/>
+            </dataSource>
+        </environment>
+    </environments>
+
+    <!--配置要读取的文件：是写sql的映射文件-->
+    <mappers>
+        <mapper resource="dao/IRegistDaoMapper.xml"/>
+        <mapper resource="dao/IUserDaoMapper.xml"/>
+    </mappers>
+</configuration>

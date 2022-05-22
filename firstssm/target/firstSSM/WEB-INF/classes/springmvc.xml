@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/mvc https://www.springframework.org/schema/mvc/spring-mvc.xsd">
+
+    <!--  配置注解扫描器：同理为了扫描到@controller类，需添加类似@Service的说明  -->
+    <context:component-scan base-package="controller"></context:component-scan>
+
+    <!--  对静态资源放行：总之就是处理static那个文件夹，放css、js的  -->
+<!--    <mvc:default-servlet-handler/>-->
+<!--    <mvc:annotation-driven/>-->
+
+    <!--  配置视图解析器：controller的返回信息加上这个前缀后缀就是需要展示的页面
+      这个过程就是地址栏输入不同的东西如/login就会调用controller的/login映射的函数，函数返回页面，页面被渲染这样
+      地址也不一定是输入的，也可以是设定的，或者返回的，如regist.jsp就会携带信息转到/regist地址，调用regist函数-->
+    <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="prefix" value="/pages/"></property>
+        <property name="suffix" value=".jsp"></property>
+    </bean>
+</beans>
